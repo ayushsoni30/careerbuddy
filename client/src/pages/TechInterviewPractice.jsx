@@ -4,7 +4,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import { ChevronLeft, ChevronRight, Check } from 'lucide-react';
 import api from '../utils/api';
 import { useToast } from '../context/ToastContext';
-
+// technologies
 const TECHNOLOGIES = [
   'Python',
   'JavaScript',

@@ -37,7 +37,7 @@ export default function Dashboard() {
   const modules = [
     {
       title: 'Smart Resume Analyzer',
-      description: 'Upload your resume PDF and match it against any Job Description to get an match score with strengths and gaps.',
+      description: 'Upload your resume PDF form and match it against any Job Description to get an match score with strengths and gaps.',
       icon: FileText,
       path: '/resume-analyzer'
     },
