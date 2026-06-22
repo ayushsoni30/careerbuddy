@@ -3,7 +3,7 @@ const router = express.Router();
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
-const pdfParse = require('pdf-parse');
+const { PDFParse } = require('pdf-parse');
 const { callGemini } = require('../utils/gemini');
 const AnalysisResult = require('../models/AnalysisResult');
 const { aiRateLimiter } = require('../middleware/rateLimiter');
@@ -44,8 +44,10 @@ router.post('/', aiRateLimiter, upload.single('resume'), async (req, res) => {
 
   try {
     const fileBuffer = fs.readFileSync(tempFilePath);
-    const pdfData = await pdfParse(fileBuffer);
-    const resumeText = pdfData.text;
+    const pdfParser = new PDFParse({ data: fileBuffer });
+    const parsedPdf = await pdfParser.getText();
+    const resumeText = parsedPdf.text;
+    await pdfParser.destroy();
 
     if (!resumeText || !resumeText.trim()) {
       throw new Error('Could not extract text content from the uploaded PDF. It might be scanned or empty.');
