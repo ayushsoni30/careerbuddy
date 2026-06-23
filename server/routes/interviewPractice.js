@@ -16,7 +16,7 @@ router.post('/generate', aiRateLimiter, async (req, res) => {
   }
 
   try {
-    const prompt = `Generate 12 top interview questions for ${technology}. Return JSON array of strings only. No numbering, no explanation, no markdown fences.`;
+    const prompt = `Generate 15 top interview questions for ${technology}. Return JSON array of strings only. No numbering, no explanation, no markdown fences.`;
 
     console.log("Calling Gemini...");
 

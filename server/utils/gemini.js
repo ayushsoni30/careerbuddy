@@ -1,8 +1,8 @@
+console.log("gemini.js loaded");
 const systemPrompt = require("./systemPrompt");
 const { GoogleGenAI } = require("@google/genai");
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-
 const callGemini = async (prompt, systemPrompt) => {
   try {
     const response = await ai.models.generateContent({
@@ -14,11 +14,19 @@ const callGemini = async (prompt, systemPrompt) => {
       },
     });
 
-    const text = response.text;
-    return text;
+    return response.text;   
+
   } catch (err) {
+    console.error("===== FULL GEMINI ERROR =====");
+    console.error(err);
+    console.error("MESSAGE:", err.message);
+
+    if (err.response) {
+      console.error("RESPONSE:", err.response);
+    }
+
     throw err;
   }
 };
 
-module.exports = { callGemini };
+  module.exports = { callGemini };
